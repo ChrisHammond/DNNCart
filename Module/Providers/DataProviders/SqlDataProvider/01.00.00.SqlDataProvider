@@ -1,0 +1,287 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+/** Create Table **/
+
+/****** Object:  Table {databaseOwner}[{objectQualifier}DnnCart_Products]    Script Date: 09/27/2006 16:31:26 ******/
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}DnnCart_Products]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
+DROP TABLE {databaseOwner}[{objectQualifier}DnnCart_Products]
+
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE {databaseOwner}[{objectQualifier}DnnCart_Products](
+	[ProductId] [int] IDENTITY(1,1) NOT NULL,
+	[ModuleId] [int] NULL,
+	[Name] [nvarchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[ShortDescription] [nvarchar](4000) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[LongDescription] [ntext] COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[Quantity] [int] NULL,
+	[Cost] [decimal](18, 0) NULL,
+	[Price] [decimal](18, 0) NULL,
+	[CreatedByUser] [int] NOT NULL,
+	[CreatedDate] [datetime] NOT NULL,
+	[LastUpdatedByUser] [int] NOT NULL,
+	[LastUpdatedDate] [datetime] NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}DnnCart_Products] PRIMARY KEY CLUSTERED 
+(
+	[ProductId] ASC
+) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[DnnCart_AddProduct]    Script Date: 09/27/2006 01:05:31 ******/
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}DnnCart_AddProduct]') AND OBJECTPROPERTY(id,N'IsProcedure') = 1)
+DROP PROCEDURE {databaseOwner}[{objectQualifier}DnnCart_AddProduct]
+
+GO
+
+
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}DnnCart_AddProduct]
+	(
+	@ModuleId int = -1,
+	@Name varchar(255),
+	@ShortDescription varchar(4000),
+	@LongDescription ntext,
+	@Quantity int,
+	@Cost decimal,
+	@Price decimal,
+	@CreatedByUser int
+	)
+	
+AS
+BEGIN	
+	insert into [{objectQualifier}DnnCart_Products]
+	(ModuleId
+	, [Name]
+	, [ShortDescription]
+	, [LongDescription]
+	, [Quantity]
+	, [Cost]
+	, [Price]
+	, [CreatedByUser]
+	, [CreatedDate]
+	, [LastUpdatedByUser]
+	, [LastUpdatedDate])
+	values
+	(@ModuleId
+	, @Name
+	, @ShortDescription
+	, @LongDescription
+	, @Quantity
+	, @Cost
+	, @Price
+	, @CreatedByUser
+	, getdate()
+	, @CreatedByUser
+	, getdate()
+	)
+		 
+	RETURN
+END
+
+GO
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+
+
+
+/****** Object:  StoredProcedure [dbo].[DnnCart_DeleteProduct]    Script Date: 09/27/2006 01:05:31 ******/
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}DnnCart_DeleteProduct]') AND OBJECTPROPERTY(id,N'IsProcedure') = 1)
+DROP PROCEDURE {databaseOwner}[{objectQualifier}DnnCart_DeleteProduct]
+
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}DnnCart_DeleteProduct]
+	(
+	@ProductId int
+	)
+	
+AS
+BEGIN	
+	DELETE FROM [{objectQualifier}DnnCart_Products]
+	WHERE ProductId = @ProductId
+		 
+	RETURN
+end
+
+GO
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+/****** Object:  StoredProcedure [dbo].[DnnCart_AddProduct]    Script Date: 09/27/2006 01:05:31 ******/
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}DnnCart_UpdateProduct]') AND OBJECTPROPERTY(id,N'IsProcedure') = 1)
+DROP PROCEDURE {databaseOwner}[{objectQualifier}DnnCart_AddProduct]
+
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}DnnCart_UpdateProduct]
+	(
+	@ProductId int,
+	@ModuleId int = -1,
+	@Name varchar(255),
+	@ShortDescription varchar(4000),
+	@LongDescription ntext,
+	@Quantity int,
+	@Cost decimal,
+	@Price decimal,
+	@LastUpdatedByUser int
+	)
+	
+AS
+BEGIN	
+	update [{objectQualifier}DnnCart_Products]
+	set 
+	[ModuleId] = @ModuleId
+	, [Name] = @Name
+	, [ShortDescription] = @ShortDescription
+	, [LongDescription] = @LongDescription
+	, [Quantity] = @Quantity
+	, [Cost] = @Cost
+	, [Price] = @Price
+	, [LastUpdatedByUser] = @LastUpdatedByUser
+	, [LastUpdatedDate] = getdate()
+	where 
+		[ProductId] = @ProductId
+		 
+	RETURN
+
+END
+
+GO
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[DnnCart_AddProduct]    Script Date: 09/27/2006 01:05:31 ******/
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}DnnCart_GetProduct]') AND OBJECTPROPERTY(id,N'IsProcedure') = 1)
+DROP PROCEDURE {databaseOwner}[{objectQualifier}DnnCart_GetProduct]
+
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}DnnCart_GetProduct]
+	(
+		@ProductId int
+	)
+	
+AS
+BEGIN
+	SELECT
+		[ProductId]
+		,[ModuleId]
+		, [Name]
+		, [ShortDescription]
+		, [LongDescription]
+		, [Quantity]
+		, [Cost]
+		, [Price]
+		, [CreatedByUser]
+		, [CreatedDate]
+		, [LastUpdatedByUser]
+		, [LastUpdatedDate]
+	
+	FROM
+		[{objectQualifier}DnnCart_Products]
+	where 
+		[ProductId] = @ProductId
+		 
+	RETURN
+END
+
+GO
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+
+
+
+/****** Object:  StoredProcedure [dbo].[DnnCart_GetProducts]    Script Date: 09/27/2006 01:05:31 ******/
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}DnnCart_GetProducts]') AND OBJECTPROPERTY(id,N'IsProcedure') = 1)
+DROP PROCEDURE {databaseOwner}[{objectQualifier}DnnCart_GetProducts]
+
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}DnnCart_GetProducts]
+	(
+		@ModuleId int	
+	)
+	
+AS
+BEGIN
+	SELECT
+		[ProductId]
+		,[ModuleId]
+		, [Name]
+		, [ShortDescription]
+		, [LongDescription]
+		, [Quantity]
+		, [Cost]
+		, [Price]
+		, [CreatedByUser]
+		, [CreatedDate]
+		, [LastUpdatedByUser]
+		, [LastUpdatedDate]
+	
+	FROM
+		[{objectQualifier}DnnCart_Products]
+		 
+	RETURN
+END
+GO
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
