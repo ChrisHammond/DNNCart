@@ -1,0 +1,87 @@
+﻿
+/** Create Table **/
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}DnnCart_ProductCategories]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
+DROP TABLE {databaseOwner}[{objectQualifier}DnnCart_ProductCategories]
+GO
+
+CREATE TABLE {databaseOwner}[{objectQualifier}DnnCart_ProductCategories]
+	(
+	Productid int NOT NULL,
+	CategoryId int NOT NULL,
+	CreatedByUser int NOT NULL,
+	CreatedDate datetime NOT NULL
+	)  ON [PRIMARY]
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}DnnCart_ProductCategories] ADD CONSTRAINT
+	DF_{objectQualifier}DnnCart_ProductCategories_CreatedDate DEFAULT GetDate() FOR CreatedDate
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}DnnCart_ProductCategories] ADD CONSTRAINT
+	PK_{objectQualifier}DnnCart_ProductCategories PRIMARY KEY CLUSTERED 
+	(
+	Productid,
+	CategoryId
+	) ON [PRIMARY]
+
+GO
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}DnnCart_Categories]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
+DROP TABLE {databaseOwner}[{objectQualifier}DnnCart_Categories]
+GO
+
+CREATE TABLE {databaseOwner}[{objectQualifier}DnnCart_Categories]
+	(
+	CategoryId int NOT NULL IDENTITY (1, 1),
+	Name nvarchar(255) NOT NULL,
+	ShortDescription nvarchar(4000) NULL,
+	LongDescription ntext NULL,
+	CreatedByUser int NOT NULL,
+	CreatedDate datetime NOT NULL,
+	LastUpdatedByUser int NOT NULL,
+	LastUpdatedDate datetime NOT NULL,
+	IsDeleted bit
+	)  ON [PRIMARY]
+	 TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}DnnCart_Categories] ADD CONSTRAINT
+	DF_{objectQualifier}DnnCart_Categories_CreatedDate DEFAULT GetDate() FOR CreatedDate
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}DnnCart_Categories] ADD CONSTRAINT
+	PK_{objectQualifier}DnnCart_Categories PRIMARY KEY CLUSTERED 
+	(
+	CategoryId
+	)  ON [PRIMARY]
+
+GO
+
+
+ALTER TABLE {databaseOwner}{objectQualifier}DnnCart_ProductCategories ADD CONSTRAINT
+	FK_{objectQualifier}DnnCart_ProductCategories_{objectQualifier}DnnCart_Categories FOREIGN KEY
+	(
+	CategoryId
+	) REFERENCES {databaseOwner}{objectQualifier}DnnCart_Categories
+	(
+	CategoryId
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}DnnCart_ProductCategories ADD CONSTRAINT
+	FK_{objectQualifier}DnnCart_ProductCategories_{objectQualifier}DnnCart_Products FOREIGN KEY
+	(
+	Productid
+	) REFERENCES {databaseOwner}{objectQualifier}DnnCart_Products
+	(
+	ProductId
+	) ON UPDATE  NO ACTION
+	 ON DELETE  NO ACTION
+GO
+
+
+
+
