@@ -97,6 +97,8 @@
     </Compile>
     <Compile Include="Assemblyinfo.cs" />
     <Compile Include="Components\Categories.cs" />
+    <Compile Include="Components\BusinessController.cs" />
+    <Compile Include="Components\CategoryController.cs" />
     <Compile Include="Components\DataProvider.cs" />
     <Compile Include="Components\ProductController.cs" />
     <Compile Include="Components\ProductInfo.cs" />
@@ -130,6 +132,7 @@
     <None Include="App_LocalResources\Settings.ascx.resx">
       <SubType>Designer</SubType>
     </None>
+    <None Include="dnncart.build" />
     <None Include="Providers\DataProviders\SqlDataProvider\01.00.00.SqlDataProvider" />
     <None Include="DnnCart.dnn" />
     <None Include="Providers\DataProviders\SqlDataProvider\04.00.00.SqlDataProvider" />

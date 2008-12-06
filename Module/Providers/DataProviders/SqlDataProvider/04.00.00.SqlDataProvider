@@ -83,5 +83,5 @@ ALTER TABLE {databaseOwner}{objectQualifier}DnnCart_ProductCategories ADD CONSTR
 GO
 
 
-
+/* we need to create SQL for category methods */
 
