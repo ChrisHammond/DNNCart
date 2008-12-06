@@ -1,6 +1,6 @@
 /*
 ' DnnCart - http://www.dnncart.com
-' Copyright (c) 2007
+' Copyright (c) 2008
 ' by Christopher Hammond. ( http://www.chrishammond.com )
 '
 ' Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
@@ -43,6 +43,7 @@ namespace DnnCart
         private string _Name;
         private string _ShortDescription;
         private string _LongDescription;
+        private bool _IsDeleted;
         private int _CreatedByUser;
         private DateTime _CreatedDate;
         private int _LastUpdatedByUser;
@@ -140,9 +141,9 @@ namespace DnnCart
         }
 
         /// <summary>
-        /// Gets and sets the cost of a product
+        /// Gets and sets if the category is deleted
         /// </summary>
-        public decimal IsDeleted
+        public bool IsDeleted
         {
             get
             {
