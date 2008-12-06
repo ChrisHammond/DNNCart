@@ -7,6 +7,7 @@
       <modulename>DnnCart</modulename>
       <description>A Shopping Cart Module for DotNetNuke</description>
       <version>04.00.00</version>
+      <resourcefile>Resources.zip</resourcefile>
       <businesscontrollerclass>DnnCart.ProductController</businesscontrollerclass>
       <modules>
         <module>
@@ -34,49 +35,12 @@
       </modules>
       <files>
         <file>
-          <path>App_LocalResources</path>
-          <name>EditProduct.ascx.resx</name>
-        </file>
-        <file>
-          <path>App_LocalResources</path>
-          <name>Settings.ascx.resx</name>
-        </file>
-        <file>
-          <path>App_LocalResources</path>
-          <name>ViewProduct.ascx.resx</name>
-        </file>
-        <file>
+          <name>DnnCart.dll</name>
+        </file>        <file>
           <name>01.00.00.SqlDataProvider</name>
         </file>
         <file>
-          <name>Admin.ascx</name>
-        </file>
-        <file>
-          <name>Admin.ascx.cs</name>
-        </file>
-        <file>
-          <name>EditProduct.ascx</name>
-        </file>
-        <file>
-          <name>EditProduct.ascx.cs</name>
-        </file>
-        <file>
-          <name>ReleaseNotes.txt</name>
-        </file>
-        <file>
-          <name>Settings.ascx</name>
-        </file>
-        <file>
-          <name>Settings.ascx.cs</name>
-        </file>
-        <file>
           <name>Uninstall.SqlDataProvider</name>
-        </file>
-        <file>
-          <name>ViewProduct.ascx</name>
-        </file>
-        <file>
-          <name>ViewProduct.ascx.cs</name>
         </file>
       </files>
     </folder>

@@ -64,11 +64,12 @@ namespace DnnCart
         #endregion
 
         #region Abstract methods
-
+        #region Product Methods
         #region add signatures
 
         //public abstract void AddDnnCart(int ModuleId, string Content, int UserId);
         public abstract void AddProduct(int ModuleId, string name, string ShortDescription, string LongDescription, int Quantity, decimal Cost, decimal Price, int createdUserId);
+
         #endregion
 
         #region get signatures
@@ -88,6 +89,27 @@ namespace DnnCart
         public abstract void DeleteProduct(int ModuleId, int ProductId);
         #endregion
 
+        #endregion
+        #region Category Methods
+        #region add signatures
+        public abstract void AddCategory(int ModuleId, string name, string ShortDescription, string LongDescription, int createdUserId);
+        #endregion
+
+        #region get signatures
+        public abstract IDataReader GetCategory(int ModuleId, int CategoryId);
+        public abstract IDataReader GetCategories(int ModuleId);
+        #endregion
+
+        #region update signatures
+        public abstract void UpdateCategory(int ModuleId, int CategoryId, string name, string ShortDescription, string LongDescription, int lastUpdatedUserId);
+        #endregion
+
+        #region delete signatures
+        public abstract void DeleteCategory(int ModuleId, int CategoryId);
+        #endregion
+
+
+        #endregion
 
         #endregion
 

@@ -9,11 +9,11 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 //
 [assembly: AssemblyTitle("DnnCart")]
-[assembly: AssemblyDescription("An opensource Shopping Cart from DnnCart.com.")]
+[assembly: AssemblyDescription("An opensource Shopping Cart for DotNetNuke from DnnCart.com.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Christoc.com")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("2007 Chris Hammond")]
+[assembly: AssemblyCopyright("2008 Chris Hammond")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]

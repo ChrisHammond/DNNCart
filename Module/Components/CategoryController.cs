@@ -41,12 +41,12 @@ namespace DnnCart
     /// <history>
     /// </history>
     /// -----------------------------------------------------------------------------
-    public class ProductController 
+    public class CategoryController 
     {
 
     #region Constructors
 
-        public ProductController()
+        public CategoryController()
         {
         }
 
@@ -64,11 +64,11 @@ namespace DnnCart
         /// <history>
         /// </history>
         /// -----------------------------------------------------------------------------
-        public void AddProduct(ProductInfo objProduct)
+        public void AddCategory(CategoryInfo objCategory)
         {
-            if (objProduct.ShortDescription.Trim() != "")
+            if (objCategory.ShortDescription.Trim() != "")
             {
-                DataProvider.Instance().AddProduct(objProduct.ModuleId, objProduct.Name, objProduct.ShortDescription, objProduct.LongDescription, objProduct.Quantity, objProduct.Cost, objProduct.Price, objProduct.CreatedByUser);
+                DataProvider.Instance().AddCategory(objCategory.ModuleId, objCategory.Name, objCategory.ShortDescription, objCategory.LongDescription, objCategory.CreatedByUser);
             }
         }
 
@@ -83,9 +83,9 @@ namespace DnnCart
         /// <history>
         /// </history>
         /// -----------------------------------------------------------------------------
-        public void DeleteProduct(int ModuleId, int ProductId) 
+        public void DeleteCategory(int ModuleId, int CategoryId) 
         {
-            DataProvider.Instance().DeleteProduct(ModuleId, ProductId);
+            DataProvider.Instance().DeleteCategory(ModuleId, CategoryId);
         }
 
         /// -----------------------------------------------------------------------------
@@ -99,9 +99,9 @@ namespace DnnCart
         /// <history>
         /// </history>
         /// -----------------------------------------------------------------------------
-        public ProductInfo GetProduct(int ModuleId, int ProductId)
+        public CategoryInfo GetCategory(int ModuleId, int CategoryId)
         {
-            return CBO.FillObject<ProductInfo>(DataProvider.Instance().GetProduct(ModuleId, ProductId));
+            return CBO.FillObject<CategoryInfo>(DataProvider.Instance().GetCategory(ModuleId, CategoryId));
         }
 
         /// -----------------------------------------------------------------------------
@@ -114,9 +114,9 @@ namespace DnnCart
         /// <history>
         /// </history>
         /// -----------------------------------------------------------------------------
-        public List<ProductInfo> GetProducts(int ModuleId)
+        public List<CategoryInfo> GetCategories(int ModuleId)
         {
-            return CBO.FillCollection< ProductInfo >(DataProvider.Instance().GetProducts(ModuleId));
+            return CBO.FillCollection<CategoryInfo>(DataProvider.Instance().GetCategories(ModuleId));
         }
 
         /// -----------------------------------------------------------------------------
@@ -129,12 +129,12 @@ namespace DnnCart
         /// <history>
         /// </history>
         /// -----------------------------------------------------------------------------
-        public void UpdateProduct(ProductInfo objProduct)
+        public void UpdateCategory(CategoryInfo objCategory)
         {
             //TODO: check for a valid product
-            if (objProduct.ShortDescription.Trim() != "")
+            if (objCategory.ShortDescription.Trim() != "")
             {
-                DataProvider.Instance().UpdateProduct(objProduct.ModuleId, objProduct.ProductId, objProduct.Name, objProduct.ShortDescription, objProduct.LongDescription, objProduct.Quantity, objProduct.Cost, objProduct.Price, objProduct.CreatedByUser);
+                DataProvider.Instance().UpdateCategory(objCategory.ModuleId, objCategory.CategoryId, objCategory.Name, objCategory.ShortDescription, objCategory.LongDescription, objCategory.LastUpdatedByUser);
             }
         }
 

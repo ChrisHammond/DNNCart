@@ -158,6 +158,7 @@ namespace DnnCart
 
     #region Public Methods
 
+        #region Product Methods
         public override void AddProduct(int ModuleId, string Name, string ShortDescription, string LongDescription, int Quantity, decimal Cost, decimal Price, int UserID)
         {
             SqlHelper.ExecuteNonQuery(ConnectionString, GetFullyQualifiedName("AddProduct"), ModuleId, Name, ShortDescription, LongDescription, Quantity, Cost, Price, UserID);
@@ -182,6 +183,33 @@ namespace DnnCart
         {
             SqlHelper.ExecuteNonQuery(ConnectionString, GetFullyQualifiedName("UpdateProduct"), ProductId, ModuleId, Name, ShortDescription, LongDescription, Quantity, Cost, Price, UserID);
         }
+        #endregion
+        #region CategoryMethods
+        public override void AddCategory(int ModuleId, string Name, string ShortDescription, string LongDescription, int UserID)
+        {
+            SqlHelper.ExecuteNonQuery(ConnectionString, GetFullyQualifiedName("AddCategory"), ModuleId, Name, ShortDescription, LongDescription, UserID);
+        }
+
+        public override void DeleteCategory(int ModuleId, int CategoryId)
+        {
+            SqlHelper.ExecuteNonQuery(ConnectionString, GetFullyQualifiedName("DeleteCategory"), CategoryId);
+        }
+
+        public override IDataReader GetCategory(int ModuleId, int CategoryId)
+        {
+            return (IDataReader)SqlHelper.ExecuteReader(ConnectionString, GetFullyQualifiedName("GetCategory"), CategoryId);
+        }
+
+        public override IDataReader GetCategories(int ModuleId)
+        {
+            return (IDataReader)SqlHelper.ExecuteReader(ConnectionString, GetFullyQualifiedName("GetCategories"), ModuleId);
+        }
+
+        public override void UpdateCategory(int ModuleId, int CategoryId, string Name, string ShortDescription, string LongDescription, int UserID)
+        {
+            SqlHelper.ExecuteNonQuery(ConnectionString, GetFullyQualifiedName("UpdateCategory"), CategoryId, ModuleId, Name, ShortDescription, LongDescription, UserID);
+        }
+        #endregion
 
     #endregion
 
